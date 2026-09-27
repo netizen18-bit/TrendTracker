@@ -56,9 +56,16 @@ export default function App() {
   // WebSocket Connection
   useEffect(() => {
     let ws;
-    const protocol = window.location.protocol === 'https:'  ? 'wss:' : 'ws:';
-    const host = window.location.host;
-    const wsUrl = `${protocol}//${host}/ws/live`;
+    let wsUrl = '';
+    if (import.meta.env.VITE_API_URL) {
+      let base = import.meta.env.VITE_API_URL;
+      if (!base.startsWith('http')) base = 'https://' + base;
+      wsUrl = base.replace(/^http/, 'ws') + '/ws/live';
+    } else {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.host;
+      wsUrl = `${protocol}//${host}/ws/live`;
+    }
 
     const connectWs = () => {
       try {

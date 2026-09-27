@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const API_BASE = '/api';
+const getApiUrl = (path) => {
+  if (!import.meta.env.VITE_API_URL) return path;
+  let base = import.meta.env.VITE_API_URL;
+  if (!base.startsWith('http')) base = 'https://' + base;
+  return base + path;
+};
+
+const API_BASE = getApiUrl('/api');
+const DEMO_BASE = getApiUrl('/demo');
 
 export const api = {
   // Dashboard & Stats
@@ -63,11 +71,11 @@ export const api = {
 
   // Controlled Demo Publisher
   publishDemoArticle: async (data) => {
-    const res = await axios.post(`/demo/publish`, data);
+    const res = await axios.post(`${DEMO_BASE}/publish`, data);
     return res.data;
   },
   resetDemoBlog: async () => {
-    const res = await axios.post(`/demo/reset`);
+    const res = await axios.post(`${DEMO_BASE}/reset`);
     return res.data;
   },
 };
