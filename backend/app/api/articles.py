@@ -8,7 +8,7 @@ from app.database.models import Article, Competitor
 
 router = APIRouter(prefix="/articles", tags=["Articles & Detection Intelligence"])
 
-@router.get("/")
+@router.get("")
 async def list_articles(
     competitor_id: Optional[int] = Query(None),
     detection_method: Optional[str] = Query(None),

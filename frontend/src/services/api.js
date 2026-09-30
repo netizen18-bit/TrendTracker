@@ -19,7 +19,7 @@ export const api = {
 
   // Competitors
   getCompetitors: async () => {
-    const res = await axios.get(`${API_BASE}/competitors/`);
+    const res = await axios.get(`${API_BASE}/competitors`);
     return res.data;
   },
   getCompetitorDetail: async (id) => {
@@ -27,7 +27,7 @@ export const api = {
     return res.data;
   },
   createCompetitor: async (data) => {
-    const res = await axios.post(`${API_BASE}/competitors/`, data);
+    const res = await axios.post(`${API_BASE}/competitors`, data);
     return res.data;
   },
   deleteCompetitor: async (id) => {
@@ -49,7 +49,7 @@ export const api = {
 
   // Articles
   getArticles: async (params = {}) => {
-    const res = await axios.get(`${API_BASE}/articles/`, { params });
+    const res = await axios.get(`${API_BASE}/articles`, { params });
     return res.data;
   },
   getArticleDetail: async (id) => {

@@ -29,7 +29,7 @@ class UpdateCompetitorRequest(BaseModel):
     monitoring_enabled: Optional[bool] = None
     check_interval_sec: Optional[int] = None
 
-@router.get("/")
+@router.get("")
 async def list_competitors(db: AsyncSession = Depends(get_db)):
     """List all competitors with their current monitoring health, source count, and article counts."""
     stmt = select(Competitor).order_by(desc(Competitor.created_at))
@@ -84,7 +84,7 @@ async def list_competitors(db: AsyncSession = Depends(get_db)):
 
     return output
 
-@router.post("/")
+@router.post("")
 async def create_competitor(payload: CreateCompetitorRequest, db: AsyncSession = Depends(get_db)):
     """
     Creates a new competitor. If auto_investigate=True, the system automatically
