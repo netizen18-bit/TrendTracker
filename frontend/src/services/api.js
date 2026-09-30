@@ -4,6 +4,10 @@ const getApiUrl = (path) => {
   if (!import.meta.env.VITE_API_URL) return path;
   let base = import.meta.env.VITE_API_URL;
   if (!base.startsWith('http')) base = 'https://' + base;
+  base = base.replace(/\/+$/, '');
+  if (base.endsWith('/api') && path.startsWith('/api')) {
+    return base + path.substring(4);
+  }
   return base + path;
 };
 
